@@ -28,9 +28,4 @@ public class Product {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    // Tự động set ngày khi insert vào DB
-    @PrePersist
-    public void prePersist() {
-        this.date = LocalDate.now();
-    }
 }
