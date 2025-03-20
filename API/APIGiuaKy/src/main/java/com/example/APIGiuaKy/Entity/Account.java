@@ -1,5 +1,5 @@
+//22110376_Pham Nguyen Tien Manh
 package com.example.APIGiuaKy.Entity;
-
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -24,10 +24,30 @@ public class Account implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
+    String username;
+
+    @Column(unique = true, nullable = false)
     String email;
 
     @Column(nullable = false)
     String password;
+
+    String avatar;
+
+    @Column(nullable = false)
+    String gender; // Thêm giới tính
+
+    public Account(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
+    public Account(String username, String email, String password, String gender) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.gender = gender;
+    }
 }
 

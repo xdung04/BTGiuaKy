@@ -1,5 +1,5 @@
+//22110376_Pham Nguyen Tien Manh
 package com.example.APIGiuaKy.Entity;
-
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
