@@ -27,28 +27,22 @@ public class RegisterActivity extends AppCompatActivity {
     RadioButton male, female;
     ImageButton btnRegister;
 
-    Button sendOTP;
+//    Button sendOTP;
     AccountRequest accountRequest = new AccountRequest();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_register);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
 
         anhxa();
 
-        sendOTP.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                accountRequest.setEmail(email.getText().toString());
-                   sendOTPfunc();
-            }
-        });
+//        sendOTP.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                accountRequest.setEmail(email.getText().toString());
+//                   sendOTPfunc();
+//            }
+//        });
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,8 +77,8 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     void anhxa(){
-        textOtp = findViewById(R.id.textOtp);
-        sendOTP = findViewById(R.id.sendOTP);
+//        textOtp = findViewById(R.id.textOtp);
+//        sendOTP = findViewById(R.id.sendOTP);
         username = findViewById(R.id.editTextName);
         email = findViewById(R.id.editTextEmailAddress);
         password = findViewById(R.id.editTextPassword);

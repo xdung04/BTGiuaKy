@@ -2,9 +2,10 @@ package com.example.project;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ImageView;
 
@@ -22,7 +23,7 @@ import retrofit2.Response;
 public class LoginActivity extends AppCompatActivity {
     private EditText edtEmail, edtPassword;
     private ImageView btnLogin; // Đổi Button thành ImageView
-
+    private TextView tvRegister;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,8 +32,17 @@ public class LoginActivity extends AppCompatActivity {
         edtEmail = findViewById(R.id.edtEmail);
         edtPassword = findViewById(R.id.edtPassword);
         btnLogin = findViewById(R.id.btnArrowLogin); // Giờ btnLogin là ImageView
-
+        tvRegister = findViewById(R.id.tvRegister);
         btnLogin.setOnClickListener(view -> loginUser());
+
+        tvRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private void loginUser() {
@@ -45,23 +55,19 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         ApiService apiService = ApiClient.getApiService();
-        Call<LoginResponse> call = apiService.login(new LoginRequest(email, password));
-
-        call.enqueue(new Callback<LoginResponse>() {
+        apiService.login(new LoginRequest(email, password)).enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    if (response.body().isSuccess()) {
-                        Toast.makeText(LoginActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
+                if (response.isSuccessful()) {
+                    Toast.makeText(LoginActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
 
-                        // Chuyển đến màn hình chính sau khi đăng nhập thành công
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
-                    } else {
-                        Toast.makeText(LoginActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                    }
+                    // Chuyển đến màn hình chính sau khi đăng nhập thành công
+                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                    intent.putExtra("Email",email);
+                    startActivity(intent);
+                    finish();
                 } else {
+
                     Toast.makeText(LoginActivity.this, "Login failed! Please try again.", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -69,12 +75,10 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
                 Toast.makeText(LoginActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.d("logggggggg", "onResponse: " + t.getMessage());
             }
         });
+
     }
 
-    public void goToRegister(View view) {
-        Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-        startActivity(intent);
-    }
 }

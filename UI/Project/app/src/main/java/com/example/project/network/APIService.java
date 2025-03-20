@@ -4,6 +4,8 @@ package com.example.project.network;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
+
 import com.example.project.models.Category;
 import com.example.project.models.CategoryResponse;
 import com.example.project.models.FoodReponse;
@@ -13,8 +15,8 @@ public interface APIService {
     @GET("/api/category/")
     Call<List<CategoryResponse>> getCategoryAll();
 
-    @GET("User")
-    Call<UserResponse> getUserInfo();
+    @GET("api/account/{email}")
+    Call<UserResponse> getUserInfo(@Path("email") String email);
 
     @GET("api/lastproduct")
     Call<List<FoodReponse>> getLastProduct();

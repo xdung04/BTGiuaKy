@@ -28,9 +28,9 @@ public class IntroActivity extends AppCompatActivity {
         boolean isLoggedIn = preferences.getBoolean("isLoggedIn", false);
 
         if (isLoggedIn) {
-            startActivity(new Intent(IntroActivity.this, MainActivity.class));
+            startActivity(new Intent(IntroActivity.this, HomeActivity.class));
         } else {
-            startActivity(new Intent(IntroActivity.this, MainActivity.class));
+            startActivity(new Intent(IntroActivity.this, HomeActivity.class));
         }
         finish();
     }

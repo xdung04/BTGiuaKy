@@ -31,10 +31,8 @@ public class ProductService {
             List<ProductResponse> data = listP.stream()
                     .map(p -> new ProductResponse(p.getAvatar()))
                     .toList();
-
-            response.put("status", "success");
-            response.put("data", data);
-            return ResponseEntity.ok(response);
+            System.out.println(data);
+            return ResponseEntity.ok(data);
         }
     }
 
