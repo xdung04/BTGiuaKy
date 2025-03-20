@@ -13,20 +13,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.project.R;
 import com.example.project.models.Category;
+import com.example.project.models.CategoryResponse;
 
 import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyViewHolder> {
     private Context context;
-    private List<Category> categoryList;
+    private List<CategoryResponse> categoryList;
 
-    public CategoryAdapter(Context context, List<Category> categoryList) {
+    public CategoryAdapter(Context context, List<CategoryResponse> categoryList) {
         this.context = context;
         this.categoryList = categoryList;
     }
 
     // Phương thức cập nhật dữ liệu cho Adapter
-    public void updateData(List<Category> newList) {
+    public void updateData(List<CategoryResponse> newList) {
         this.categoryList = newList;
         notifyDataSetChanged();
     }
@@ -39,10 +40,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Category category = categoryList.get(position);
-        holder.tenSp.setText(category.getName());
+        CategoryResponse category = categoryList.get(position);
+        holder.tenSp.setText(category.getCategoryName());
         Glide.with(context)
-                .load(category.getImages())
+                .load(category.getAvatar())
                 .into(holder.images);
     }
 
