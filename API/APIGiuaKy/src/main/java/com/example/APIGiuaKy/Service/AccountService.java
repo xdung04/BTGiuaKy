@@ -59,6 +59,9 @@ public class AccountService {
             return false;
         }
     }
+    public Account findByEmail(String email) {
+        return accountRepository.findByEmail(email).orElse(null);
+    }
 
 
 
