@@ -2,6 +2,8 @@
 //22110378_Nguyen Duc Minh
 package com.example.APIGiuaKy.Controller;
 
+import com.example.APIGiuaKy.DTO.AccountRequest;
+import com.example.APIGiuaKy.Entity.Account;
 import com.example.APIGiuaKy.Service.AccountService;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
@@ -26,9 +28,9 @@ public class RegisterController {
         return ResponseEntity.ok(exists);
     }
 
-    @PostMapping("/register/{username}/{email}/{password}/{gender}")
-    public ResponseEntity<Boolean> createAccount(@PathVariable String username, @PathVariable String email, @PathVariable String password, @PathVariable String gender) {
-        boolean created = accountService.createAccount(username, email, password, gender);
+    @PostMapping("/register")
+    public ResponseEntity<Boolean> createAccount(@RequestBody AccountRequest accountRequest) {
+        boolean created = accountService.createAccount(accountRequest);
         return ResponseEntity.ok(created);
     }
 

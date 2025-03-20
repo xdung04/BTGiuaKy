@@ -2,14 +2,13 @@
 //22110376_Pham Nguyen Tien Manh
 //22110378_Nguyen Duc Minh
 package com.example.APIGiuaKy.Service;
+import com.example.APIGiuaKy.DTO.AccountRequest;
 import com.example.APIGiuaKy.Entity.Account;
 import com.example.APIGiuaKy.Repository.AccountRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 
@@ -27,14 +26,18 @@ public class AccountService {
         return false;
     }
 
-    public boolean createAccount(String username, String email, String password, String gender) {
+    public boolean createAccount(AccountRequest accountRequest) {
         try {
             // Kiểm tra xem email đã tồn tại chưa
-            if (accountRepository.findByEmail(email).isPresent()) {
+            if (accountRepository.findByEmail(accountRequest.getEmail()).isPresent()) {
                 return false;
             }
 
-            Account account = new Account(username, email, password, gender);
+            Account account = new Account();
+            account.setUsername(accountRequest.getUsername());
+            account.setPassword(accountRequest.getPassword());
+            account.setEmail(accountRequest.getEmail());
+            account.setGender(accountRequest.getGender());
             accountRepository.save(account);
             return true;
         } catch (Exception e) {
