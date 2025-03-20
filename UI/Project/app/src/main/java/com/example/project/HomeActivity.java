@@ -6,12 +6,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 
 import com.bumptech.glide.Glide;
 import com.example.project.adapters.CategoryAdapter;
@@ -20,7 +21,6 @@ import com.example.project.models.CategoryResponse;
 import com.example.project.models.FoodReponse;
 import com.example.project.models.UserResponse;
 import com.example.project.network.APIService;
-import com.example.project.RetrofitClient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
 
     RecyclerView rcCate, rcLastProduct;
     CategoryAdapter categoryAdapter;
@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     APIService apiService;
     List<CategoryResponse> categoryList = new ArrayList<>();
     List<FoodReponse> foodList = new ArrayList<>();
+    String emailUser;
 
     TextView txtUserName;
     ImageView imgAvatar;
@@ -45,18 +46,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Intent intent = getIntent();
+        emailUser = intent.getStringExtra("Email");
+        if (emailUser == null)
+            emailUser = "minhtrungbttv@gmail.com";
         AnhXa();
 
-        // Gán LayoutManager và Adapter cho Category RecyclerView
-        rcCate.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        categoryAdapter = new CategoryAdapter(this, categoryList);
-        rcCate.setAdapter(categoryAdapter);
-
-        // Gán LayoutManager và Adapter cho Last Product RecyclerView
-        rcLastProduct.setLayoutManager(new GridLayoutManager(this, 2));
-        foodAdapter = new FoodAdapter(this, foodList);
-        rcLastProduct.setAdapter(foodAdapter);
 
         // Gọi API
         GetCategory();
@@ -76,8 +71,10 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<List<CategoryResponse>> call, Response<List<CategoryResponse>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     categoryList = response.body();
-                    categoryAdapter.updateData(categoryList);
-                    categoryAdapter.notifyDataSetChanged();
+                    categoryAdapter = new CategoryAdapter(HomeActivity.this, categoryList);
+                    // Gán LayoutManager và Adapter cho Category RecyclerView
+                    rcCate.setLayoutManager(new LinearLayoutManager(HomeActivity.this, LinearLayoutManager.HORIZONTAL, false));
+                    rcCate.setAdapter(categoryAdapter);
                     Log.d("API_RESPONSE", "Categories Loaded: " + categoryList.size());
                 } else {
                     Log.e("API_ERROR", "Category Response Error: " + response.code());
@@ -98,8 +95,10 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<List<FoodReponse>> call, Response<List<FoodReponse>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     foodList = response.body();
-                    foodAdapter.updateData(foodList);
-                    foodAdapter.notifyDataSetChanged();
+                    foodAdapter = new FoodAdapter(HomeActivity.this, foodList);
+                    // Gán LayoutManager và Adapter cho Last Product RecyclerView
+                    rcLastProduct.setLayoutManager(new GridLayoutManager(HomeActivity.this, 2));
+                    rcLastProduct.setAdapter(foodAdapter);
                     Log.d("API_RESPONSE", "Food Loaded: " + foodList.size());
                 } else {
                     Log.e("API_ERROR", "Food Response Error: " + response.code());
@@ -116,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         txtUserName = findViewById(R.id.txtName);
         imgAvatar = findViewById(R.id.avatarImage);
         apiService = RetrofitClient.getRetrofit().create(APIService.class);
-        apiService.getUserInfo().enqueue(new Callback<UserResponse>() {
+        apiService.getUserInfo(emailUser).enqueue(new Callback<UserResponse>() {
             @Override
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
@@ -124,10 +123,8 @@ public class MainActivity extends AppCompatActivity {
                     txtUserName.setText("Hi! " + user.getUsername());
 
                     // Load avatar bằng Glide
-                    Glide.with(MainActivity.this)
+                    Glide.with(HomeActivity.this)
                             .load(user.getAvatar())
-                            .placeholder(R.drawable.icprofile)
-                            .error(R.drawable.icprofile)
                             .into(imgAvatar);
                 } else {
                     Log.e("USER_INFO", "Failed to get user data");

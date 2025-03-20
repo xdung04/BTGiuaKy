@@ -1,17 +1,20 @@
 package com.example.project.models;
 
+import com.google.gson.annotations.SerializedName;
+
 public class FoodReponse {
-    private String image;
+    @SerializedName("avatar")
+    private String avatar;
 
-    public FoodReponse(String image) {
-        this.image = image;
+    public FoodReponse(String avatar) {
+        this.avatar = avatar;
     }
 
-    public String getImage() {
-        return image;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 }

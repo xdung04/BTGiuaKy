@@ -1,12 +1,10 @@
 package com.example.project.adapters;
 
-import android.app.Notification;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,9 +27,11 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder> 
         this.foodlist = newList;
         notifyDataSetChanged();
     }
+    @NonNull
     @Override
     public FoodAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_food, parent, false);
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_food, parent, false);
         return new MyViewHolder(view);
     }
 
@@ -40,7 +40,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder> 
     public void onBindViewHolder(FoodAdapter.MyViewHolder holder, int position) {
         FoodReponse food = foodlist.get(position);
         Glide.with(context)
-                .load(food.getImage())
+                .load(food.getAvatar())
                 .into(holder.images);
     }
 
@@ -54,7 +54,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder> 
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            images = itemView.findViewById(R.id.image_cate);
+            images = itemView.findViewById(R.id.image_food);
         }
     }
 }

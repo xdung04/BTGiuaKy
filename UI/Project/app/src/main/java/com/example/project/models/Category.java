@@ -4,6 +4,7 @@ package com.example.project.models;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Category implements Serializable {
     @SerializedName("id")
@@ -14,6 +15,7 @@ public class Category implements Serializable {
     private String image;
     @SerializedName("desciption")
     private String desciption;
+
 
     public int getId() {
         return id;

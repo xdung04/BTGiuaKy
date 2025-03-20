@@ -5,6 +5,8 @@ import lombok.*;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "categories")
 @Getter
@@ -22,6 +24,7 @@ public class Category {
 
     private String avatar;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "category")
+    @JsonManagedReference
     private List<Product> products;
 }

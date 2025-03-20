@@ -1,4 +1,3 @@
-
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -7,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/main"
-    tools:context=".MainActivity">
+    tools:context=".HomeActivity">
 
     <!-- Thanh Header -->
     <LinearLayout
@@ -22,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="307dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
@@ -33,8 +32,8 @@
                 android:layout_height="wrap_content"
                 android:text="Hi! Nguyễn Hữu Trung"
                 android:textColor="#F41B0B"
-                android:textStyle="bold"
-                android:textSize="16sp"/>
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtHead"
@@ -42,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:text="Eat and Order"
                 android:textColor="#ED0909"
-                android:textSize="14sp"/>
+                android:textSize="14sp" />
         </LinearLayout>
 
         <ImageView
@@ -50,7 +49,8 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/rounded_image"/>
+            android:src="@drawable/rounded_image" />
+
     </LinearLayout>
 
     <!-- Bottom App Bar -->
@@ -206,9 +206,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Tìm kiếm..."
             android:background="@null"
-            android:padding="8dp"/>
+            android:hint="Tìm kiếm..."
+            android:minHeight="48dp"
+            android:padding="8dp" />
     </LinearLayout>
 
     <!-- Tiêu đề Categories -->
@@ -251,13 +252,13 @@
         android:id="@+id/txtLastProductTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="36dp"
         android:text="Last Product"
         android:textColor="#000000"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintHorizontal_bias="0.051"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/recyclerCategories" />
 
@@ -265,7 +266,7 @@
         android:id="@+id/recyclerLastProduct"
         android:layout_width="412dp"
         android:layout_height="240dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="36dp"
         android:clipToPadding="false"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
@@ -275,7 +276,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txtLastProductTitle"
-        app:spanCount="2" />
+        app:spanCount="3" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
