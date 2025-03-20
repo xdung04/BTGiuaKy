@@ -29,6 +29,5 @@ public class Account implements Serializable {
 
     @Column(nullable = false)
     String password;
-
 }
 
