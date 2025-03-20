@@ -1,6 +1,8 @@
 package com.example.project.models;
 
 public class CategoryResponse {
+    private Long id;
+
     private String avatar;
 
     private String categoryName;

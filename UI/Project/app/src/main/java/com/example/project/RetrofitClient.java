@@ -11,7 +11,7 @@ public class RetrofitClient {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
                     //Đường dãn APT
-                    .baseUrl("http://10.0.2.2:8080/")
+                    .baseUrl("http://app.iotstar.vn:8081/appfoods/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }

@@ -2,7 +2,10 @@ package com.example.project.models;
 
 public class UserResponse {
     private  String username;
-
+    private Long id;
+    private String email;
+    private String password;
+    private String gender;
     private String avatar;
 
     public UserResponse(String username, String avatar) {
@@ -25,4 +28,5 @@ public class UserResponse {
     public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
+
 }
