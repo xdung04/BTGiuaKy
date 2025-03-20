@@ -112,7 +112,7 @@
             android:textStyle="bold"/>
 
 
-        <Button
+        <ImageView
             android:id="@+id/btnArrowLogin"
             android:layout_width="wrap_content"
             android:layout_height="60dp"

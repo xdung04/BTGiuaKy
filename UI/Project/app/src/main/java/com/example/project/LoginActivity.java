@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,7 +21,7 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText edtEmail, edtPassword;
-    private Button btnLogin;
+    private ImageView btnLogin; // Đổi Button thành ImageView
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
 
         edtEmail = findViewById(R.id.edtEmail);
         edtPassword = findViewById(R.id.edtPassword);
-        btnLogin = findViewById(R.id.btnArrowLogin);
+        btnLogin = findViewById(R.id.btnArrowLogin); // Giờ btnLogin là ImageView
 
         btnLogin.setOnClickListener(view -> loginUser());
     }
