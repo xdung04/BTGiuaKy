@@ -49,7 +49,7 @@ public class HomeActivity extends AppCompatActivity {
         Intent intent = getIntent();
         emailUser = intent.getStringExtra("Email");
         if (emailUser == null)
-            emailUser = "minhtrungbttv@gmail.com";
+            emailUser = "dungssunny412@gmail.com";
         AnhXa();
 
 

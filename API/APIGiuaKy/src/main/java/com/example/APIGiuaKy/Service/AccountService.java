@@ -27,24 +27,19 @@ public class AccountService {
     }
 
     public boolean createAccount(AccountRequest accountRequest) {
-        try {
-            // Kiểm tra xem email đã tồn tại chưa
-            if (accountRepository.findByEmail(accountRequest.getEmail()).isPresent()) {
-                return false;
-            }
-
-            Account account = new Account();
-            account.setUsername(accountRequest.getUsername());
-            account.setPassword(accountRequest.getPassword());
-            account.setEmail(accountRequest.getEmail());
-            account.setGender(accountRequest.getGender());
-            accountRepository.save(account);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (checkExistingEmail(accountRequest.getEmail())) {
             return false;
         }
+        Account account = Account.builder()
+                .username(accountRequest.getUsername())
+                .password(accountRequest.getPassword())
+                .email(accountRequest.getEmail())
+                .gender(accountRequest.getGender())
+                .build();
+        accountRepository.save(account);
+        return true;
     }
+
 
 
     public boolean updatePassword(String email, String newPassword) {

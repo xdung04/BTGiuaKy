@@ -21,10 +21,11 @@ public class OTPController {
 
     // Tạo OTP và lưu vào cơ sở dữ liệu
     @PostMapping("/generate/{email}")
-    public ResponseEntity<String> generateOTP(@PathVariable String email) {
+    public ResponseEntity<Boolean> generateOTP(@PathVariable String email) {
         otpService.saveAndSendOTP(email);
-        return ResponseEntity.ok("OTP has been generated");
+        return ResponseEntity.ok(true);
     }
+
 
     // Xác thực OTP
     @PostMapping("/verifyOTP/{email}/{otp}")
