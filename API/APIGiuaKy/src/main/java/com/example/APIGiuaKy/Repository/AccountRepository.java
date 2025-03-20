@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.APIGiuaKy.Entity.Account;
 
 public interface AccountRepository extends JpaRepository<Account, Integer>{
-	Optional<Account> findByEmailAndPassword(String email, String password);
+	Optional<Account> findByEmailAndPassword(String email, String password); //22110446 - pham minh trung
 }
