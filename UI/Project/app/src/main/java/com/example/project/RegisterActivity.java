@@ -123,6 +123,9 @@ public class RegisterActivity extends AppCompatActivity {
                             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                                 if (response.isSuccessful() && response.body() != null && response.body()) {
                                     Toast.makeText(RegisterActivity.this, "Đăng ký tài khoản thành công!", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(RegisterActivity.this,HomeActivity.class);
+                                    intent.putExtra("Email",email.getText().toString());
+                                    startActivity(intent);
                                 } else {
                                     Toast.makeText(RegisterActivity.this, "Không thể đăng ký tài khoản, vui lòng thử lại sau!", Toast.LENGTH_SHORT).show();
                                 }
